@@ -1,4 +1,7 @@
 __pycache__/
+.vscode
+.env
+
 get_layer_changes/image/
 prediction_base_image/a.cache
 venv

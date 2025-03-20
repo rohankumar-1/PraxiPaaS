@@ -30,7 +30,6 @@ import yaml
 from tqdm import tqdm
 
 from columbus.columbus import columbus
-import argparse
 
 
 def parse_cs(changeset_names, cs_dir, multilabel=False): # SHOULD PROBABLY GET RID OF ITERATIVE OPTION
@@ -127,19 +126,19 @@ def create_files(tagset_names, ts_dir, labels, ids, tags):
             cur_dict = {'label': labels[i], 'id': ids, 'tags': tags[i]}
         cur_fname = ts_dir + '/' + tagset_name
         with open(cur_fname, 'w') as outfile:
-            #print("gen_tagset", os.path.dirname(outfile.name))
-            #print("gen_tagset", cur_fname)
+            print("gen_tagset", os.path.dirname(outfile.name))
+            print("gen_tagset", cur_fname)
             yaml.dump(cur_dict, outfile, default_flow_style=False)
         yield cur_dict
 
-def run(cs_dir):
+def run():
     # prog_start = time.time()
 
-    #cs_dir = "/fake-snapshot/changesets"
-    # cs_dir = "/changesets"
+    cs_dir = "/fake-snapshot/changesets"
     ts_dir = "/tagset"
     if not os.path.isdir(ts_dir):
         os.mkdir(ts_dir)
+
 
     changeset_names = get_changeset_names(cs_dir)
     if len(changeset_names)==0:
@@ -157,7 +156,7 @@ def run(cs_dir):
 
     # logging.info("Generating tagsets:")
     tags = get_columbus_tags(changesets)
-    
+
     # logging.info("Writing tagset files to %s", ts_dir)
     return create_files(tagset_names, ts_dir, labels, ids, tags)
 

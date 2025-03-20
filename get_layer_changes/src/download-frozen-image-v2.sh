@@ -15,6 +15,8 @@ for cmd in curl jq; do
 	fi
 done
 
+echo "Image: $1"
+
 usage() {
 	echo "usage: $0 dir image[:tag][@digest] ..."
 	echo "       $0 /tmp/old-hello-world hello-world:latest@sha256:8be990ef2aeb16dbcb9271ddfe2610fa6658d13f6dfb8bc72074cc1ca36966a7"
